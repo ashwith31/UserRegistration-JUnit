@@ -1,104 +1,59 @@
 package com.userregistrationtest;
 
-import com.junituserregistration.InvalidEntryException;
 import com.junituserregistration.UserRegistration;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class UserRegistrationTest {
-    UserRegistration valid = new UserRegistration();
+    UserRegistration validator = new UserRegistration();
+
     @Test
-    public void givenFirstName_WhenValid_ShouldReturnTrue() throws InvalidEntryException {
-        boolean result = valid.firstName("Ashwith");
-        Assertions.assertTrue(result);
+    public void givenFirstName_WhenValid_ShouldReturnTrue() {
+        String FirstName = "Ashwith";
+        assertTrue(validator.Name(FirstName));
     }
 
     @Test
-    public void givenFirstName_WhenShort_ShouldReturnFalse() throws InvalidEntryException {
-        boolean result = valid.firstName("Aa");
-        Assertions.assertFalse(result);
-    }
-    @Test
-    public void givenLastName_WhenValid_ShouldReturnTrue() throws InvalidEntryException {
-        boolean result = valid.lastName("Ashu");
-        Assertions.assertTrue(result);
+    public void givenFirstName_WhenShort_ShouldReturnFalse() {
+        String FirstName = "As";
+        assertFalse(validator.Name(FirstName));
     }
 
     @Test
-    public void givenLastName_WhenShort_ShouldReturnFalse() throws InvalidEntryException {
-        boolean result = valid.lastName("Sh");
-        Assertions.assertFalse(result);
+    public void givenEmail_WhenValid_ShouldReturnTrue() {
+        String eMail = "mfjkd@bl.co";
+        assertTrue(validator.Email(eMail));
     }
 
     @Test
-    public void givenEmail_WhenValid_ShouldReturnTrue() throws InvalidEntryException {
-        boolean result = valid.Email("abc.xyz@bl.co.in");
-        Assertions.assertTrue(result);
+    public void givenEmail_WhenShort_ShouldReturnFalse() {
+        String eMail = "ashu79*@bl.co";
+        assertFalse(validator.Email(eMail));
     }
 
     @Test
-    public void givenEmail_WhenNotValid_ShouldReturnFalse() throws InvalidEntryException {
-        boolean result = valid.Email("abc.xyz@bl.in");
-        Assertions.assertFalse(result);
-    }
-    @Test
-    public void givenContactNumber_WhenValid_ShouldReturnTrue() throws InvalidEntryException {
-        boolean result = valid.contactNumber("91 9923456789");
-        Assertions.assertTrue(result);
+    public void givenNumber_WhenValid_ShouldReturnTrue() {
+        String phoneNo = "91 967667890";
+        assertFalse(validator.Email(phoneNo));
     }
 
     @Test
-    public void givenContactNumber_WhenNotValid_ShouldReturnFalse() throws InvalidEntryException {
-        boolean result = valid.contactNumber("1234567890");
-        Assertions.assertFalse(result);
+    public void givenNumber_WhenNotValid_ShouldReturnFalse() {
+        String phoneNo = "8534567890";
+        assertFalse(validator.Email(phoneNo));
     }
 
     @Test
-    public void givenPassword1_WhenValid_ShouldReturnTrue() throws InvalidEntryException {
-        boolean result = valid.password1("ashu");
-        Assertions.assertTrue(result);
+    public void givenPassword_WhenValid_ShouldReturnTrue() {
+        String password = "Abcd1234$";
+        assertTrue(validator.password(password));
     }
 
     @Test
-    public void givenPassword1_WhenShort_ShouldReturnFalse() throws InvalidEntryException {
-        boolean result = valid.password1("ab");
-        Assertions.assertFalse(result);
+    public void givenPassword_WhenNotValid_ShouldReturnFalse() {
+        String password = "Abcdefgh";
+        assertFalse(validator.password(password));
     }
-
-    @Test
-    public void givenPassword2_WhenOneUpp_Case_ShouldReturnTrue() throws InvalidEntryException {
-        boolean result = valid.password2("Qwertyuiop");
-        Assertions.assertTrue(result);
-    }
-
-    @Test
-    public void givenPassword2_WhenNoUpp_Case_ShouldReturnFalse() throws InvalidEntryException {
-        boolean result = valid.password2("qwertyuiop");
-        Assertions.assertFalse(result);
-    }
-
-    @Test
-    public void givenPassword3_WhenOne_Uppcase_One_num_ShouldReturnFalse() throws InvalidEntryException {
-        boolean result = valid.password3("awertyuek");
-        Assertions.assertFalse(result);
-    }
-
-    @Test
-    public void givenPassword4_WhenOneUpCase_OneNum_OneSpecial_ShouldReturnTrue() throws InvalidEntryException {
-        boolean result = valid.password4("Qwertyue122$");
-        Assertions.assertTrue(result);
-    }
-
-    @Test
-    public void givenPassword4_WhenNo_OneUpCase_OneNum_OneSpecial_ShouldReturnFalse() throws InvalidEntryException {
-        boolean result = valid.password4("Qwertyue12");
-        Assertions.assertFalse(result);
-    }
-
-    @Test
-    public void givenEmailValidation_WhenValid_ShouldReturnTrue() throws InvalidEntryException {
-        boolean result = valid.EmailValidation("abc.xyz@bl.co.in");
-        Assertions.assertTrue(result);
-    }
-
 }
